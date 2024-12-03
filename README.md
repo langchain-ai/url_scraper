@@ -1,15 +1,22 @@
 # URL Scraper 🌐🤖
 
-This repository is a starting point to test strategies for extracting structured information from a specific URL using a language model.
+This repository is a starting point to test strategies for extracting structured information from a given URL using a language model.
 
+## What's included
+
+1. A bare minimum implementation that can be used to extract structured information from a given URL.
+2. A dataset and evaluation script to evaluate the performance of the agent.
 
 ## How it works
 
-This repository implements the bare minimal implementation to get you started. It includes the following steps:
+The agent is a LangGraph agent that uses a language model to extract structured information from a given URL. The agent is implemented in the `src/agent` folder.
 
-1. Fetches the HTML content of a given URL.
-2. Parses the HTML content into a langchain `Document` object.
-3. Extracts structured information from the `Document` using a user provided JSON schema and a chat model. Extraction relies on vanilla [tool calling](https://python.langchain.com/docs/concepts/tool_calling/)
+The agent does the following:
+
+1. Accepts a URL and a JSON schema as input from a user.
+2. Fetches the HTML content of a given URL.
+3. Parses the HTML content into text.
+4. Uses a vanilla chat model capable of [tool calling](https://python.langchain.com/docs/concepts/tool_calling/) to extract structured information from the text that matches the schema.
 
 ## 🚀 Launch the LangGraph Server
 
