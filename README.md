@@ -54,7 +54,7 @@ If all is well, you should see the following output:
 >> 
 >> Docs: http://127.0.0.1:2024/docs
 >> 
->> LangGraph Studio Web UI: https://smith.langchain.com/studio/?baseUrl=http://127.0.0. 1:2024
+>> LangGraph Studio Web UI: https://smith.langchain.com/studio/?baseUrl=http://127.0.0.1:2024
 
 ## Improving the agent
 
