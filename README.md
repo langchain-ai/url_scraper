@@ -110,3 +110,8 @@ To run the evaluation, you can use the `run_eval.py` script in the `eval` folder
 ```shell
 python eval/run_eval.py --experiment-prefix "My custom prefix" --agent-url http://localhost:2024
 ```
+
+## Deploying
+
+* You can deploy it using [LangGraph Platform](https://langchain-ai.github.io/langgraph/cloud/quick_start/).
+* If you're deploying this agent yoruself and the container is not network isolated (e.g., can access other network resources), you should configure a proxy for using in web requests.
