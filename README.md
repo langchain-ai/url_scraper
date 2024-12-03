@@ -5,7 +5,7 @@ This repository is a starting point to test strategies for extracting structured
 ## What's included
 
 1. A bare minimum implementation that can be used to extract structured information from a given URL (`src/agent` folder).
-2. A dataset and evaluation script to evaluate the performance of the agent doing the extraction (`/src/eval` folder).
+2. A dataset and evaluation script to evaluate the performance of the agent doing the extraction (`src/eval` folder).
 
 ## How it works
 
