@@ -48,15 +48,13 @@ langgraph dev
 
 If all is well, you should see the following output:
 
-```shell
-Ready!
-
-API: http://127.0.0.1:2024
-
-Docs: http://127.0.0.1:2024/docs
-
-LangGraph Studio Web UI: https://smith.langchain.com/studio/?baseUrl=http://127.0.0.1:2024
-```
+>> Ready!
+>> 
+>> API: http://127.0.0.1:2024
+>> 
+>> Docs: http://127.0.0.1:2024/docs
+>> 
+>> LangGraph Studio Web UI: https://smith.langchain.com/studio/?baseUrl=http://127.0.0. 1:2024
 
 ## Improving the agent
 
@@ -90,12 +88,12 @@ export LANGSMITH_API_KEY=<your_langsmith_api_key>
 
 ### Evaluation metric
 
-The quality of the extraction results is evaluated by an LLM model which assigns a
-score between 0 and 1 depending on how closely the extracted information matches the expected information.
+A score between 0 and 1 is assigned to each extraction result by an LLM model that acts
+as a judge.
+
+The model assigns the score based on how closely the extracted information matches the expected information.
 
 ### Get the dataset
-
-Make sure that you have the LangSmith CLI installed:
 
 Create a new dataset in LangSmith using the code in the `eval` folder:
 
