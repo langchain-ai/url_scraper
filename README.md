@@ -77,7 +77,7 @@ Prior to engaging in any optimization, it is important to establish a baseline p
 Make sure you have the LangSmith CLI installed:
 
 ```shell
-pip install langsmith-cli
+pip install langsmith
 ```
 
 And set your API key:
