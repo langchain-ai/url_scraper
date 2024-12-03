@@ -32,7 +32,7 @@ Install dependencies:
 pip install -e .
 ```  
 
-Load API Keys into the environment for the LangSmith SDK and OpenAI API:
+Load API keys into the environment for the LangSmith SDK and OpenAI API:
 
 ```shell
 export LANGSMITH_API_KEY=<your_langsmith_api_key>
