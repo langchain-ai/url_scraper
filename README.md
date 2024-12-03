@@ -80,10 +80,12 @@ Make sure you have the LangSmith CLI installed:
 pip install langsmith
 ```
 
-And set your API key:
+And set your API keys:
 
 ```shell
 export LANGSMITH_API_KEY=<your_langsmith_api_key>
+# We're using an LLM as a judge, so will need an API key
+export OPENAI_API_KEY=<your_langsmith_api_key>
 ```
 
 ### Evaluation metric
