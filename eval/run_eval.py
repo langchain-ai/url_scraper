@@ -11,7 +11,7 @@ client = Client()
 
 DEFAULT_DATASET_NAME = "Webpage Extraction Dataset"
 DEFAULT_GRAPH_ID = "agent"
-DEFAULT_AGENT_URL = "https://langr.ph/marketplace/b5152a8c-e0ed-4ed9-9bac-9c3cb7566c8d"
+DEFAULT_AGENT_URL = "http://localhost:2024"
 
 JUDGE_LLM = ChatOpenAI(model="gpt-4o")
 
