@@ -2,6 +2,10 @@
 
 This repository is a starting point to test strategies for extracting structured information from a given URL using a language model.
 
+You can visit [this page](https://smith.langchain.com/public/c4497a67-10ea-46cf-92d6-15f0797b3f3c/d) to see an example
+dataset that is used for evaluation of this agent together
+with an experimental run using the default agent.
+
 ## What's included
 
 1. A bare minimum implementation that can be used to extract structured information from a given URL (`src/agent` folder).
