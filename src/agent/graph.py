@@ -11,7 +11,7 @@ the performance of the LLM.
 """
 
 from io import BytesIO
-from typing import Any, Dict, Sequence, TypedDict
+from typing import Any, Dict, Optional, Sequence, TypedDict
 
 import httpx
 from langchain_core.runnables import RunnableConfig
@@ -31,9 +31,13 @@ HEADERS = {
 }
 
 
-async def fetch_data_from_url(url: str, proxies: str) -> bytes:
+async def fetch_data_from_url(
+    url: str,
+    *,
+    proxy: Optional[str] = None,
+) -> bytes:
     """Fetch data from a URL."""
-    client = httpx.AsyncClient(headers=HEADERS, proxies=proxies)
+    client = httpx.AsyncClient(headers=HEADERS, proxy=proxy, http2=True)
     response = await client.get(url)
     response.raise_for_status()
     return response.content
@@ -98,7 +102,7 @@ async def extract(
         ExtractedData: The extracted data.
     """
     configuration = Configuration.from_runnable_config(config)
-    binary_data = await fetch_data_from_url(state["url"], configuration.proxies)
+    binary_data = await fetch_data_from_url(state["url"], proxy=configuration.proxy)
     file = BytesIO(binary_data)
     file.name = state["url"]
     documents = parse_binary_input(file)

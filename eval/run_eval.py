@@ -11,7 +11,7 @@ client = Client()
 
 DEFAULT_DATASET_NAME = "Webpage Extraction Dataset"
 DEFAULT_GRAPH_ID = "agent"
-DEFAULT_AGENT_URL = "https://langr.ph/marketplace/b5152a8c-e0ed-4ed9-9bac-9c3cb7566c8d"
+DEFAULT_AGENT_URL = "http://localhost:2024"
 
 JUDGE_LLM = ChatOpenAI(model="gpt-4o")
 
@@ -96,16 +96,11 @@ def make_agent_runner(graph_id: str, agent_url: str):
     agent_graph = RemoteGraph(graph_id, url=agent_url)
 
     def run_agent(inputs: dict):
-        try:
-            result = agent_graph.invoke(
-                {"url": inputs["url"], "json_schema": inputs["json_schema"]}
-            )
+        result = agent_graph.invoke(
+            {"url": inputs["url"], "json_schema": inputs["json_schema"]}
+        )
 
-            return {"data": result["data"]}
-        except:
-            return {
-                "data": [],
-            }
+        return {"data": result["data"]}
 
     return run_agent
 

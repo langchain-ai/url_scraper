@@ -25,11 +25,11 @@ class Configuration:
             },
         )
     )
-    proxies: Optional[str] = field(
+    proxy: Optional[str] = field(
         default=None,
         metadata={
             "description": "The proxies to use when making requests to the internet. "
-            "Passed to httpx.AsyncClient as the proxies parameter.",
+            "Passed to httpx.AsyncClient as the proxy parameter.",
         },
     )
 
