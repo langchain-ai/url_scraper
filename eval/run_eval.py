@@ -60,7 +60,7 @@ def evaluate_agent_llm_judge(outputs: dict, reference_outputs: dict):
 
 
 def correct(inputs: dict, outputs: dict, reference_outputs: dict) -> int:
-    """Evaluator function to check if the extracted answer is correct.
+    """Check if the extracted answer is correct.
 
     This function compares the extracted answer with the reference answer.
 
@@ -102,7 +102,7 @@ def make_agent_runner(graph_id: str, agent_url: str):
             )
 
             return {"data": result["data"]}
-        except:
+        except Exception as e:  # noqa
             return {
                 "data": [],
             }

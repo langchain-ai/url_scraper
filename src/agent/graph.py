@@ -45,7 +45,18 @@ async def fetch_data_from_url(url: str, proxies: str) -> bytes:
 async def extract_from_text(
     model_name: str, text: str, json_schema: Dict[str, Any]
 ) -> ExtractResponse:
-    """An endpoint to extract content from a given text object."""
+    """Extract information from the given text.
+
+    Args:
+        model_name: The name of the model to use (e.g., "openai/gpt-4").
+        text: The text to extract from (e.g., the text content of a web page).
+        json_schema: The JSON schema to use for extraction.
+            The extracted data will be a list of objects each of which
+            must conform to this schema.
+
+    Returns:
+        ExtractResponse: The extracted data.
+    """
     validate_json_schema(json_schema)
     schema = update_json_schema(json_schema)
     model = load_chat_model(model_name)
@@ -88,7 +99,7 @@ async def extract(
         "data": Sequence[dict],
     },
 ):
-    """Extraction node fetches data from a URL and extracts information using an LLM.
+    """Fetch data from a URL and extract information using an LLM.
 
     Args:
         state (State): Contains a URL to scrape and a JSON schema.

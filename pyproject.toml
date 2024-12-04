@@ -58,6 +58,12 @@ lint.ignore = [
     # Relax the convention by _not_ requiring documentation for every function parameter.
     "D417",
     "E501",
+    "D100",
+    "D101",
+    "D102",
+    "D103",
+    "D104",
+
 ]
 [tool.ruff.lint.per-file-ignores]
 "tests/*" = ["D", "UP"]
