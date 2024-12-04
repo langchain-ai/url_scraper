@@ -4,8 +4,8 @@ This repository is a starting point to test strategies for extracting structured
 
 ## What's included
 
-1. A bare minimum implementation that can be used to extract structured information from a given URL.
-2. A dataset and evaluation script to evaluate the performance of the agent.
+1. A bare minimum implementation that can be used to extract structured information from a given URL (`src/agent` folder).
+2. A dataset and evaluation script to evaluate the performance of the agent doing the extraction (`src/eval` folder).
 
 ## How it works
 
@@ -32,7 +32,7 @@ Install dependencies:
 pip install -e .
 ```  
 
-Load API Keys into the environment for the LangSmith SDK and OpenAI API:
+Load API keys into the environment for the LangSmith SDK and OpenAI API:
 
 ```shell
 export LANGSMITH_API_KEY=<your_langsmith_api_key>
@@ -48,15 +48,13 @@ langgraph dev
 
 If all is well, you should see the following output:
 
-```shell
-Ready!
-
-API: http://127.0.0.1:2024
-
-Docs: http://127.0.0.1:2024/docs
-
-LangGraph Studio Web UI: https://smith.langchain.com/studio/?baseUrl=http://127.0.0.1:2024
-```
+>> Ready!
+>> 
+>> API: http://127.0.0.1:2024
+>> 
+>> Docs: http://127.0.0.1:2024/docs
+>> 
+>> LangGraph Studio Web UI: https://smith.langchain.com/studio/?baseUrl=http://127.0.0.1:2024
 
 ## Improving the agent
 
@@ -79,23 +77,25 @@ Prior to engaging in any optimization, it is important to establish a baseline p
 Make sure you have the LangSmith CLI installed:
 
 ```shell
-pip install langsmith-cli
+pip install langsmith
 ```
 
-And set your API key:
+And set your API keys:
 
 ```shell
 export LANGSMITH_API_KEY=<your_langsmith_api_key>
+# We're using an LLM as a judge, so will need an API key
+export OPENAI_API_KEY=<your_langsmith_api_key>
 ```
 
 ### Evaluation metric
 
-The quality of the extraction results is evaluated by an LLM model which assigns a
-score between 0 and 1 depending on how closely the extracted information matches the expected information.
+A score between 0 and 1 is assigned to each extraction result by an LLM model that acts
+as a judge.
+
+The model assigns the score based on how closely the extracted information matches the expected information.
 
 ### Get the dataset
-
-Make sure that you have the LangSmith CLI installed:
 
 Create a new dataset in LangSmith using the code in the `eval` folder:
 
@@ -110,3 +110,8 @@ To run the evaluation, you can use the `run_eval.py` script in the `eval` folder
 ```shell
 python eval/run_eval.py --experiment-prefix "My custom prefix" --agent-url http://localhost:2024
 ```
+
+## Deploying
+
+* You can deploy it using [LangGraph Platform](https://langchain-ai.github.io/langgraph/cloud/quick_start/).
+* If you're deploying this agent yoruself and the container is not network isolated (e.g., can access other network resources), you should configure a proxy for using in web requests.
