@@ -60,7 +60,7 @@ def evaluate_agent_llm_judge(outputs: dict, reference_outputs: dict):
 
 
 def correct(inputs: dict, outputs: dict, reference_outputs: dict) -> int:
-    """Evaluator function to check if the extracted answer is correct.
+    """Check if the extracted answer is correct.
 
     This function compares the extracted answer with the reference answer.
 
@@ -96,16 +96,11 @@ def make_agent_runner(graph_id: str, agent_url: str):
     agent_graph = RemoteGraph(graph_id, url=agent_url)
 
     def run_agent(inputs: dict):
-        try:
-            result = agent_graph.invoke(
-                {"url": inputs["url"], "json_schema": inputs["json_schema"]}
-            )
+        result = agent_graph.invoke(
+            {"url": inputs["url"], "json_schema": inputs["json_schema"]}
+        )
 
-            return {"data": result["data"]}
-        except:
-            return {
-                "data": [],
-            }
+        return {"data": result["data"]}
 
     return run_agent
 

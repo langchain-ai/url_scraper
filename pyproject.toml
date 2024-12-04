@@ -20,6 +20,7 @@ dependencies = [
     "langchain-anthropic==0.3.0",
     "jsonschema==4.23.0",
     "langchain-community==0.3.8",
+    "httpx[http2]",
 ]
 
 
@@ -56,6 +57,11 @@ lint.ignore = [
     # We actually do want to import from typing_extensions
     "UP035",
     # Relax the convention by _not_ requiring documentation for every function parameter.
+    "D100",
+    "D101",
+    "D102",
+    "D103",
+    "D104",
     "D417",
     "E501",
 ]

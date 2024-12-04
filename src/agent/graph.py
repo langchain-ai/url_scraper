@@ -11,7 +11,7 @@ the performance of the LLM.
 """
 
 from io import BytesIO
-from typing import Any, Dict, Sequence, TypedDict
+from typing import Any, Dict, Optional, Sequence, TypedDict
 
 import httpx
 from langchain_core.runnables import RunnableConfig
@@ -31,9 +31,13 @@ HEADERS = {
 }
 
 
-async def fetch_data_from_url(url: str, proxies: str) -> bytes:
+async def fetch_data_from_url(
+    url: str,
+    *,
+    proxy: Optional[str] = None,
+) -> bytes:
     """Fetch data from a URL."""
-    client = httpx.AsyncClient(headers=HEADERS, proxies=proxies)
+    client = httpx.AsyncClient(headers=HEADERS, proxy=proxy, http2=True)
     response = await client.get(url)
     response.raise_for_status()
     return response.content
@@ -45,7 +49,16 @@ async def fetch_data_from_url(url: str, proxies: str) -> bytes:
 async def extract_from_text(
     model_name: str, text: str, json_schema: Dict[str, Any]
 ) -> ExtractResponse:
-    """An endpoint to extract content from a given text object."""
+    """Extract content from the text matching the given JSON schema.
+
+    Args:
+        model_name: The name of the model to use. (e.g., "openai/gpt-4o")
+        text: The text to extract from (e.g., the content of the web page).
+        json_schema: The JSON schema to use for extraction.
+
+    Returns:
+        extracted data where each item is a dictionary with keys matching the schema.
+    """
     validate_json_schema(json_schema)
     schema = update_json_schema(json_schema)
     model = load_chat_model(model_name)
@@ -88,7 +101,7 @@ async def extract(
         "data": Sequence[dict],
     },
 ):
-    """Extraction node fetches data from a URL and extracts information using an LLM.
+    """Fetch data from a URL and extracts information using an LLM.
 
     Args:
         state (State): Contains a URL to scrape and a JSON schema.
@@ -98,7 +111,7 @@ async def extract(
         ExtractedData: The extracted data.
     """
     configuration = Configuration.from_runnable_config(config)
-    binary_data = await fetch_data_from_url(state["url"], configuration.proxies)
+    binary_data = await fetch_data_from_url(state["url"], proxy=configuration.proxy)
     file = BytesIO(binary_data)
     file.name = state["url"]
     documents = parse_binary_input(file)

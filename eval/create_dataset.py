@@ -512,8 +512,8 @@ if __name__ == "__main__":
     # run chains and LLMs over a shared set of examples.
     try:
         exists_dataset = client.read_dataset(dataset_name=dataset_name)
-        print(f"Dataset '{dataset_name}' already exists.")
-        print("You can access the dataset via the URL: ", exists_dataset.url)
+        print(f"Dataset '{dataset_name}' already exists.")  # noqa: T201
+        print("You can access the dataset via the URL: ", exists_dataset.url)  # noqa: T201
         exit(1)
     except LangSmithNotFoundError:
         # Then let's create the dataset if it doesn't exist
