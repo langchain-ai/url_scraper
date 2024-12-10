@@ -59,39 +59,6 @@ def evaluate_agent_llm_judge(outputs: dict, reference_outputs: dict):
     return score.score
 
 
-def correct(inputs: dict, outputs: dict, reference_outputs: dict) -> int:
-    """Check if the extracted answer is correct.
-
-    This function compares the extracted answer with the reference answer.
-
-    If both are numbers, it checks if they are close enough and returns 1 if they are.
-
-    It penalizes wrong answers with -1.
-
-    If the provided answer is None (was not answered), then the score wil be 0
-    """
-    actual_answer = outputs["value"]
-    reference_answer = reference_outputs["answer"]
-
-    if reference_answer is None:
-        return 1 if actual_answer is None else -1
-
-    if actual_answer is None:
-        # We assign a score of 0 if the answer is not provided
-        return 0
-
-    try:
-        actual_float = float(actual_answer)
-        reference_float = float(reference_answer)
-    except (ValueError, TypeError):
-        # Return False if conversion to float fails
-        return 0
-
-    # Compare the floats with precision tolerance
-    is_correct = isclose(actual_float, reference_float, rel_tol=1e-9, abs_tol=1e-9)
-    return 1 if is_correct else -1
-
-
 def make_agent_runner(graph_id: str, agent_url: str):
     agent_graph = RemoteGraph(graph_id, url=agent_url)
 
